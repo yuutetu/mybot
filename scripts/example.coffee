@@ -17,8 +17,9 @@ module.exports = (robot) ->
   rubot.hear /天気教えて/i, (msg) ->
     request = msg.http('http://weather.livedoor.com/forecast/webservice/json/v1?city=270000').get()
     request (error, response, body) ->
-      json = JSON.parse body
-      msg.reply json['forecasts'][0]['telop']
+      msg.reply body
+      # json = JSON.parse body
+      # msg.reply json['forecasts'][0]['telop']
 
   # お小遣い
 
