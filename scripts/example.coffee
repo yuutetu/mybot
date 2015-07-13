@@ -13,6 +13,15 @@ module.exports = (robot) ->
   robot.hear /おはよう/i, (res) ->
     res.send "おはようございますって、ミサカはミサカは皆さんに挨拶してみる！"
 
+  # 天気
+  rubot.hear /天気教えて/i, (msg) ->
+    request = msg.http('http://weather.livedoor.com/forecast/webservice/json/v1?city=270000').get()
+    request (error, response, body) ->
+      json = JSON.parse body
+      msg.reply json['forecasts'][0]['telop']
+
+  # お小遣い
+
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
   #
