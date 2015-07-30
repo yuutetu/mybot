@@ -8,16 +8,25 @@
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
+cronJob = require('cron').CronJob
+
+module.exports = (robot) ->
+  cronTest = new cronJob('0 0 7 * * *', () =>
+    envelope = room: "#general"
+    robot.send envelope, "ゴミ出しかな？ 確認してね！"
+  )
+  cronTest.start()
+
 module.exports = (robot) ->
 
   robot.hear /おはよう/i, (res) ->
     res.send "おはようございますって、ミサカはミサカは皆さんに挨拶してみる！"
 
   # 天気
-  rubot.hear /天気教えて/i, (msg) ->
-    request = msg.http('http://weather.livedoor.com/forecast/webservice/json/v1?city=270000').get()
-    msg.reply "ちょっと待ってね！"
-    request (error, response, body) ->
+  # rubot.hear /天気教えて/i, (msg) ->
+    # request = msg.http('http://weather.livedoor.com/forecast/webservice/json/v1?city=270000').get()
+    # msg.reply "ちょっと待ってね！"
+    # request (error, response, body) ->
       msg.reply "データ来たよ！"
       # json = JSON.parse body
       # msg.reply json['forecasts'][0]['telop']
