@@ -11,9 +11,9 @@
 cronJob = require('cron').CronJob
 
 module.exports = (robot) ->
-  cronTest = new cronJob('0 0 7 * * *', () =>
+  cronTest = new cronJob('0 0 7 * * 2,5,6', () =>
     envelope = room: "#general"
-    robot.send envelope, "ゴミ出しかな？ 確認してね！"
+    robot.send envelope, "今日は燃えるゴミだよ！忘れないでね！"
   )
   cronTest.start()
 
