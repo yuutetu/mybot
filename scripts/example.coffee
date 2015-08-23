@@ -11,11 +11,9 @@
 cronJob = require('cron').CronJob
 
 module.exports = (robot) ->
-  cronTest = new cronJob('0 0 7 * * 2,5,6', () =>
-    envelope = room: "#general"
-    robot.send envelope, "今日は燃えるゴミだよ！忘れないでね！"
-  )
-  cronTest.start()
+  new cron '0 0 7 * * 2,5,6', () =>
+    robot.send {room: "#general"}, "今日は燃えるゴミだよ！忘れないでね！"
+  , null, true, "Asia/Tokyo"
 
 module.exports = (robot) ->
 
@@ -27,7 +25,7 @@ module.exports = (robot) ->
     # request = msg.http('http://weather.livedoor.com/forecast/webservice/json/v1?city=270000').get()
     # msg.reply "ちょっと待ってね！"
     # request (error, response, body) ->
-      msg.reply "データ来たよ！"
+      # msg.reply "データ来たよ！"
       # json = JSON.parse body
       # msg.reply json['forecasts'][0]['telop']
 
